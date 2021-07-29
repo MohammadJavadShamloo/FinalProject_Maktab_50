@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Logout{% endblock %}
+{% block content %}
+    <div class="content">
+        <div id="content" class="colM">
+            <h1>Logged out</h1>
+            <p>Thanks for spending some quality time with the Web site today.</p>
+            <p>You can Login using below link or link in navbar.</p>
+            <p><a href="{% url 'login' %}">Log in again</a></p>
+            <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+    </div>
+{% endblock %}

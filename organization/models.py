@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
+from django.urls import reverse
 
 
 class Province(models.Model):
@@ -9,10 +10,10 @@ class Province(models.Model):
     """
     name = models.CharField(max_length=50)
 
-    def get_absolute_url(self):
-        pass
-
     class Meta:
+        """
+        Meta Class Contains Ordering for order in database
+        """
         ordering = ('-name',)
 
     def __str__(self):
@@ -25,10 +26,10 @@ class OrganizationProduct(models.Model):
     """
     name = models.CharField(max_length=50)
 
-    def get_absolute_url(self):
-        pass
-
     class Meta:
+        """
+            Meta Class Contains Ordering for order in database
+        """
         ordering = ('-name',)
 
     def __str__(self):
@@ -60,9 +61,16 @@ class Organization(models.Model):
                                   related_name='registered_organization')
 
     def get_absolute_url(self):
-        pass
+        """
+        Canonical Url for Organization Model
+        :return: reverse of detail for organization
+        """
+        return reverse('organization:detail_organization', self.id)
 
     class Meta:
+        """
+            Meta Class Contains Ordering for order in database
+        """
         ordering = ('-registration_date', '-name',)
 
     def __str__(self):
@@ -82,10 +90,10 @@ class FollowUp(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     report = models.TextField()
 
-    def get_absolute_url(self):
-        pass
-
     class Meta:
+        """
+            Meta Class Contains Ordering for order in database
+        """
         ordering = ('date',)
 
     def __str__(self):

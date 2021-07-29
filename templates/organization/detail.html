@@ -5,9 +5,11 @@
 {% block content %}
     <br>
     <br>
-    <button type="button" class="btn btn-info"><a href="{% url 'organization:update_organization' organization.id %}">Update The Organization</a></button>
+    <button type="button" class="btn btn-info"><a href="{% url 'organization:update_organization' organization.id %}">Update
+        The Organization</a></button>
     <button type="button" class="btn btn-info"><a href="">Making Quote</a></button>
-    <button type="button" class="btn btn-info"><a href="{% url 'organization:add_report' organization.id%}">Adding Report</a></button>
+    <button type="button" class="btn btn-info"><a href="{% url 'organization:add_report' organization.id %}">Adding
+        Report</a></button>
     <table class="h-75 table table-hover mt-5">
         <tbody>
         <tr>
@@ -65,6 +67,31 @@
                 <td>{{ followup.registrar }}</td>
                 <td>{{ followup.date }}</td>
                 <td>{{ followup.report|truncatewords:5 }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    Related Products
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Tax</th>
+            <th scope="col">Catalog</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for related_product in related_products %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ related_product.name }}</td>
+                <td>{{ related_product.price }}</td>
+                <td>{{ related_product.tax }}</td>
+                <td><a href="{{ related_product.pdf_file.url }}">Download Catalog</a></td>
             </tr>
         {% endfor %}
         </tbody>
