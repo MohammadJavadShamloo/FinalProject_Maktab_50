@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Organization Lists{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Organizations</th>
+            <th scope="col">Organization Name</th>
+            <th scope="col">Registrar</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for organization in organization_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'organization:detail_organization' organization.id %}">Show Organization</a></td>
+                <td>{{ organization.name }}</td>
+                <td>{{ organization.registrar }}</td>
+                <td>{{ organization.contact_name }}</td>
+                <td><a href="{% url 'organization:add_report' organization.id %}">Adding Report</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>Total Organizations :</td>
+            <td colspan="4"></td>
+            <td>{{ organization_list.count }}</td>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

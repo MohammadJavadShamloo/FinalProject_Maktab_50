@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ organization.name }}{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <button type="button" class="btn btn-info"><a href="{% url 'organization:update_organization' organization.id %}">Update The Organization</a></button>
+    <button type="button" class="btn btn-info"><a href="">Making Quote</a></button>
+    <button type="button" class="btn btn-info"><a href="{% url 'organization:add_report' organization.id%}">Adding Report</a></button>
+    <table class="h-75 table table-hover mt-5">
+        <tbody>
+        <tr>
+            <td>Province</td>
+            <td>{{ organization.province }}</td>
+        </tr>
+        <tr>
+            <td>Workers</td>
+            <td>{{ organization.workers_count }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ organization.phone }}</td>
+        </tr>
+        <tr>
+            <td>Registration Time</td>
+            <td>{{ organization.registration_date }}</td>
+        </tr>
+        <tr>
+            <td>Registrar</td>
+            <td>{{ organization.registrar }}</td>
+        </tr>
+        <tr>
+            <td>Contact Name</td>
+            <td>{{ organization.contact_name }}</td>
+        </tr>
+        <tr>
+            <td>Contact Phone</td>
+            <td>{{ organization.contact_phone }}</td>
+        </tr>
+        <tr>
+            <td>Products</td>
+            <td>{{ products }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Registrar</th>
+            <th scope="col">Date</th>
+            <th scope="col">Report</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for followup in organization.followups.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ followup.registrar }}</td>
+                <td>{{ followup.date }}</td>
+                <td>{{ followup.report|truncatewords:5 }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

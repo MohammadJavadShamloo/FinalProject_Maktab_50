@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}Organization Creating{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <form method="post">
+        {{ form | crispy}}
+        {% csrf_token %}
+        <input class="btn btn-success mt-2" type="submit" value="Save">
+    </form>
+{% endblock %}
