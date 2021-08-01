@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} List of Provinces {% endblock %}
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Province Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for province in province_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'organization:province_update' province.id %}">{{ province.name }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>Total Province :</td>
+            <td>{{ province_list.count }}</td>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

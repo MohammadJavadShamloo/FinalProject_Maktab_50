@@ -1,7 +1,7 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
 
-from .validators import *
 from organization.models import OrganizationProduct
 
 
@@ -14,9 +14,9 @@ class Product(models.Model):
                                 decimal_places=2)
     tax = models.BooleanField(default=True)
     pdf_file = models.FileField(upload_to='files/pdf_files/%Y/%m/%d',
-                                validators=[validate_pdf, ])
+                                validators=[FileExtensionValidator(allowed_extensions=['pdf']), ])
     pic_file = models.FileField(upload_to='files/pic_files/%Y/%m/%d',
-                                validators=[validate_pic, ])
+                                validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'svg']), ])
     technical_report = models.TextField()
     related_products = models.ManyToManyField(OrganizationProduct,
                                               related_name='related_products')

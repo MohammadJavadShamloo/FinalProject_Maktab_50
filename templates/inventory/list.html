@@ -17,7 +17,7 @@
         {% for product in product_list %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'inventory:detail_product' product.id %}">Show Product</a></td>
+                <td><a href="{% url 'inventory:product_detail' product.id %}">Show Product</a></td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.tax }}</td>

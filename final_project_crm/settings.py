@@ -138,4 +138,4 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = reverse_lazy('organization:list_organization')
+LOGIN_REDIRECT_URL = reverse_lazy('organization:organization_list')

@@ -25,7 +25,7 @@ class CreateOrganizationView(LoginRequiredMixin, CreateView):
         'contact_phone',
         'contact_email',
     ]
-    success_url = reverse_lazy('organization:list_organization')
+    success_url = reverse_lazy('organization:organization_list')
 
     def form_valid(self, form):
         form.instance.registrar = self.request.user
@@ -48,7 +48,7 @@ class UpdateOrganizationView(LoginRequiredMixin, UpdateView):
         'contact_phone',
         'contact_email',
     ]
-    success_url = reverse_lazy('organization:list_organization')
+    success_url = reverse_lazy('organization:organization_list')
 
 
 class ListOrganizationView(LoginRequiredMixin, ListView):
@@ -69,7 +69,6 @@ class DetailOrganizationView(LoginRequiredMixin, DetailView):
         context['products'] = ','.join([product.name for product in self.object.products.all()])
         ids = self.object.products.all().values_list('related_products__id', flat=True)
         context['related_products'] = Product.objects.filter(id__in=ids)
-        print(context['related_products'])
         return context
 
 
@@ -89,12 +88,31 @@ def add_report(request, pk):
                 organization=organization,
                 report=form.cleaned_data['report']
             )
-            return redirect('organization:detail_organization', organization.id)
+            return redirect('organization:organization_detail', organization.id)
         else:
-            return redirect('organization:list_organization')
+            return redirect('organization:organization_list')
     else:
         form = ReportForm()
         return render(request,
                       'organization/report_from.html',
                       {'form': form,
                        'organization': organization})
+
+
+class CreateProvinceView(CreateView):
+    model = Province
+    template_name = 'organization/create_province.html'
+    fields = ['name']
+    success_url = reverse_lazy('organization:organization_list')
+
+
+class UpdateProvinceView(UpdateView):
+    model = Province
+    template_name = 'organization/update_province.html'
+    fields = ['name']
+    success_url = reverse_lazy('organization:organization_list')
+
+
+class ListProvinceView(ListView):
+    model = Province
+    template_name = 'organization/list_province.html'

@@ -18,7 +18,7 @@ class CreateProductView(LoginRequiredMixin, CreateView):
               'pic_file',
               'technical_report',
               'related_products', ]
-    success_url = reverse_lazy('inventory:list_product')
+    success_url = reverse_lazy('inventory:product_list')
 
 
 class UpdateProductView(LoginRequiredMixin, UpdateView):
@@ -34,7 +34,7 @@ class UpdateProductView(LoginRequiredMixin, UpdateView):
               'pic_file',
               'technical_report',
               'related_products', ]
-    success_url = reverse_lazy('inventory:list_product')
+    success_url = reverse_lazy('inventory:product_list')
 
 
 class ListProductView(LoginRequiredMixin, ListView):

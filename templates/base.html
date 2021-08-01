@@ -18,25 +18,33 @@
 <body>
 <div class="d-flex" id="wrapper">
     <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">High Tech Store</div>
-        <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3"
-               href="{% url 'organization:list_organization' %}">Organizations List</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3"
-               href="{% url 'organization:create_organization' %}">Create Organizations</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3"
-               href="{% url 'inventory:list_product' %}">Product List</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3"
-               href="{% url 'inventory:create_product' %}">Create Product</a>
+    {% if request.user.is_authenticated %}
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light">High Tech Store</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'organization:organization_list' %}">Organizations List</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'organization:organization_create' %}">Create Organizations</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'organization:province_list' %}">Province List</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'organization:province_create' %}">Create Province</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'inventory:product_list' %}">Product List</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'inventory:product_create' %}">Create Product</a>
+            </div>
         </div>
-    </div>
+    {% endif %}
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <!-- Top navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container-fluid">
-                <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                {% if request.user.is_authenticated %}
+                    <button class="btn btn-primary" id="sidebarToggle">Menu</button>
+                {% endif %}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
@@ -49,16 +57,28 @@
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Organization</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'organization:create_organization' %}">Create Organization</a>
-                                    <a class="dropdown-item" href="{% url 'organization:list_organization' %}">List Organization</a>
+                                    <a class="dropdown-item" href="{% url 'organization:organization_create' %}">Create
+                                        Organization</a>
+                                    <a class="dropdown-item" href="{% url 'organization:organization_list' %}">List
+                                        Organization</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Province</a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'organization:province_create' %}">Create
+                                        Province</a>
+                                    <a class="dropdown-item" href="{% url 'organization:province_list' %}">Province List</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'inventory:create_product' %}">Create Product</a>
-                                    <a class="dropdown-item" href="{% url 'inventory:list_product' %}">List Product</a>
+                                    <a class="dropdown-item" href="{% url 'inventory:product_create' %}">Create
+                                        Product</a>
+                                    <a class="dropdown-item" href="{% url 'inventory:product_list' %}">List Product</a>
                                 </div>
                             </li>
                         {% else %}

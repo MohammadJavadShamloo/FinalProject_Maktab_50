@@ -17,7 +17,7 @@
         {% for organization in organization_list %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'organization:detail_organization' organization.id %}">Show Organization</a></td>
+                <td><a href="{% url 'organization:organization_detail' organization.id %}">Show Organization</a></td>
                 <td>{{ organization.name }}</td>
                 <td>{{ organization.registrar }}</td>
                 <td>{{ organization.contact_name }}</td>
