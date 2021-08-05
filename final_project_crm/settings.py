@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'followup.apps.FollowupConfig',
     'quote.apps.QuoteConfig',
+    'celery',
+    'services.apps.ServicesConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +143,9 @@ STATICFILES_DIRS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = reverse_lazy('organization:organization_list')
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mshomloo@gmail.com'
+EMAIL_HOST_PASSWORD = 'MOHAMMADSHAMLOO1381'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

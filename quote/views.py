@@ -9,6 +9,7 @@ from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from quote.forms import QuoteItemFormSet, QuoteForm
 from .models import Quote
 from .utils import calculate_off, calculate_tax
+from .tasks import send_quote
 
 
 class QuoteCreateView(CreateView):
@@ -70,3 +71,11 @@ def quote_pdf(request, quote_id):
                                                weasyprint.CSS(settings.STATIC_ROOT + 'css/bootstrap.min.css'),
                                                weasyprint.CSS(settings.STATIC_ROOT + 'css/styles.css'), ])
     return response
+
+
+def send_quote_to_organization(request, quote_id, organization_id):
+    is_sent = send_quote.delay(quote_id, organization_id)
+    if is_sent:
+        return HttpResponse('Ok')
+    else:
+        return HttpResponse('No')

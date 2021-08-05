@@ -16,4 +16,7 @@ urlpatterns = [
     path('pdf/<int:quote_id>/',
          views.quote_pdf,
          name='quote_pdf'),
+    path('email/<int:quote_id>/<int:organization_id>/',
+         views.send_quote_to_organization,
+         name='send_mail'),
 ]
