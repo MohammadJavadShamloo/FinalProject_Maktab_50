@@ -19,6 +19,9 @@ class QuoteItem(models.Model):
                                           decimal_places=2)
     off_percent = models.PositiveIntegerField(default=0)
 
+    def __str__(self):
+        return self.product.name
+
 
 class Quote(models.Model):
     organization = models.ForeignKey(Organization,

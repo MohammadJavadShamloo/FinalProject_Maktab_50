@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+    Quote Number {{ quote.id }}
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Organization</th>
+            <td>{{ quote.organization.name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Registrar</th>
+            <td>{{ quote.registrar.name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Registration Date</th>
+            <td>{{ quote.registration_date }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Last Update</th>
+            <td>{{ quote.updating_date }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    Items :
+    <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Count</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount</th>
+        </tr>
+        {% for item in quote.items %}
+            <th scope="row">{{ forloop.counter }}</th>
+            <tr>{{ item.product.name }}</tr>
+            <tr>{{ item.count_of_product }}</tr>
+            <tr>{{ item.price_after_tax }}</tr>
+            <tr>{{ item.off_percent }}</tr>
+        {% endfor %}
+        </thead>
+    </table>
+{% endblock %}

@@ -1,7 +1,8 @@
 from django.shortcuts import redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
 from quote.forms import QuoteItemFormSet, QuoteForm
+from .models import Quote
 from .utils import calculate_off, calculate_tax
 
 
@@ -38,3 +39,13 @@ class QuoteCreateView(CreateView):
     def form_invalid(self, form, quote_item_formset):
         return self.render_to_response(self.get_context_data(form=form,
                                                              quote_item_price=quote_item_formset))
+
+
+class QuoteListView(ListView):
+    model = Quote
+    template_name = 'quote/list.html'
+
+
+class QuoteDetailView(DetailView):
+    model = Quote
+    template_name = 'quote/detail.html'

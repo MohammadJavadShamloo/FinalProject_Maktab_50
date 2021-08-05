@@ -6,5 +6,11 @@ app_name = 'quote'
 urlpatterns = [
     path('create/',
          views.QuoteCreateView.as_view(),
-         name='create_quote'),
+         name='quote_create'),
+    path('list/',
+         views.QuoteListView.as_view(),
+         name='quote_list'),
+    path('detail/<int:pk>/',
+         views.QuoteDetailView.as_view(),
+         name='quote_detail'),
 ]
