@@ -43,12 +43,14 @@
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
         </tr>
-        {% for item in quote.items %}
-            <th scope="row">{{ forloop.counter }}</th>
-            <tr>{{ item.product.name }}</tr>
-            <tr>{{ item.count_of_product }}</tr>
-            <tr>{{ item.price_after_tax }}</tr>
-            <tr>{{ item.off_percent }}</tr>
+        {% for item in quote.items.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.count_of_product }}</td>
+                <td>{{ item.price_after_tax }}</td>
+                <td>{{ item.off_percent }}</td>
+            </tr>
         {% endfor %}
         </thead>
     </table>

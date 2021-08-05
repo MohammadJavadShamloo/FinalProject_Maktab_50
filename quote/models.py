@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from inventory.models import Product
 from organization.models import Organization
@@ -19,6 +20,9 @@ class QuoteItem(models.Model):
                                           decimal_places=2)
     off_percent = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        ordering = ['price_after_tax', ]
+
     def __str__(self):
         return self.product.name
 
@@ -32,3 +36,12 @@ class Quote(models.Model):
                                   related_name='quotes')
     registration_date = models.DateTimeField(auto_now_add=True)
     updating_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['registration_date', ]
+
+    def __str__(self):
+        return f'Quote Number {self.id}'
+
+    def get_absolute_url(self):
+        return reverse('quote:quote_detail', self.id)

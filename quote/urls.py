@@ -13,4 +13,7 @@ urlpatterns = [
     path('detail/<int:pk>/',
          views.QuoteDetailView.as_view(),
          name='quote_detail'),
+    path('pdf/<int:quote_id>/',
+         views.quote_pdf,
+         name='quote_pdf'),
 ]

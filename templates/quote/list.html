@@ -11,6 +11,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Details</th>
             <th scope="col">Customer Name</th>
             <th scope="col">Products</th>
             <th scope="col">Download Quote</th>
@@ -21,9 +22,10 @@
         {% for quote in quote_list %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'quote:quote_detail' quote.id %}">Show Quote</a></td>
                 <td>{{ quote.organization.contact_name }}</td>
                 <td>{{ quote.items.all|join:',' }}</td>
-                <td></td>
+                <td><a href="{% url 'quote:quote_pdf' quote.id %}">Pdf</a></td>
                 <td></td>
             </tr>
         {% endfor %}

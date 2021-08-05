@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Organization</th>
+        <td>{{ quote.organization.name }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Registrar</th>
+        <td>{{ quote.registrar.name }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Registration Date</th>
+        <td>{{ quote.registration_date }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Last Update</th>
+        <td>{{ quote.updating_date }}</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+Items :
+<br>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Count</th>
+        <th scope="col">Price</th>
+        <th scope="col">Discount</th>
+    </tr>
+    {% for item in quote.items.all %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.count_of_product }}</td>
+            <td>{{ item.price_after_tax }}</td>
+            <td>{{ item.off_percent }}</td>
+        </tr>
+    {% endfor %}
+    </thead>
+</table>
+</body>
+</html>

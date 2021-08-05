@@ -1,4 +1,9 @@
-from django.shortcuts import redirect
+import weasyprint
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import redirect, get_object_or_404
+from django.template.loader import render_to_string
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
 from quote.forms import QuoteItemFormSet, QuoteForm
@@ -49,3 +54,19 @@ class QuoteListView(ListView):
 class QuoteDetailView(DetailView):
     model = Quote
     template_name = 'quote/detail.html'
+
+
+@login_required
+def quote_pdf(request, quote_id):
+    quote = get_object_or_404(Quote, id=quote_id)
+
+    html = render_to_string('quote/pdf_template.html',
+                            {'quote': quote})
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename=quote_{quote.id}.pdf'
+    weasyprint.HTML(string=html).write_pdf(response,
+                                           stylesheets=[
+                                               weasyprint.CSS(settings.STATIC_ROOT + 'css/bootstrap.min.css'),
+                                               weasyprint.CSS(settings.STATIC_ROOT + 'css/styles.css'), ])
+    return response
