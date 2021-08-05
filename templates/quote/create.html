@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Create Quote
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_form_errors }}
+            {{ form|crispy}}
+            <br>
+            <br>
+            {{ formset.non_form_errors }}
+            {{ formset.management_form }}
+            {{ formset|crispy }}
+            <div class="mt-3 mb-5">
+                <button type="submit" class="px-5 btn btn-info">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

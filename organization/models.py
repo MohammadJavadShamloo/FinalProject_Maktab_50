@@ -52,7 +52,6 @@ class Organization(models.Model):
     products = models.ManyToManyField(OrganizationProduct,
                                       related_name='organizations')
 
-
     contact_name = models.CharField(max_length=100)
     contact_phone = models.CharField(max_length=50,
                                      validators=[RegexValidator(regex='^(\+98?)?{?(0?9[0-9]{9,9}}?)$'), ])
