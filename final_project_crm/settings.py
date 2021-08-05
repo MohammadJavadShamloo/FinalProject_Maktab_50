@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'inventory.apps.InventoryConfig',
+    'followup.apps.FollowupConfig',
+    'quote.apps.QuoteConfig',
 ]
 
 MIDDLEWARE = [

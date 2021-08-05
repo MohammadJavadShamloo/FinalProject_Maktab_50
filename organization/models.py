@@ -51,6 +51,8 @@ class Organization(models.Model):
     workers_count = models.PositiveIntegerField(default=0)
     products = models.ManyToManyField(OrganizationProduct,
                                       related_name='organizations')
+
+
     contact_name = models.CharField(max_length=100)
     contact_phone = models.CharField(max_length=50,
                                      validators=[RegexValidator(regex='^(\+98?)?{?(0?9[0-9]{9,9}}?)$'), ])
@@ -75,26 +77,3 @@ class Organization(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class FollowUp(models.Model):
-    """
-    CLass for followups and reports.
-    """
-    registrar = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                  on_delete=models.PROTECT,
-                                  related_name='followups')
-    organization = models.ForeignKey(Organization,
-                                     on_delete=models.PROTECT,
-                                     related_name='followups')
-    date = models.DateTimeField(auto_now_add=True)
-    report = models.TextField()
-
-    class Meta:
-        """
-            Meta Class Contains Ordering for order in database
-        """
-        ordering = ('date',)
-
-    def __str__(self):
-        return self.report

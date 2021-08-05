@@ -1,12 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
-from .forms import ReportForm
-from .models import *
 from inventory.models import Product
+from .models import *
 
 
 class CreateOrganizationView(LoginRequiredMixin, CreateView):
@@ -70,33 +67,6 @@ class DetailOrganizationView(LoginRequiredMixin, DetailView):
         ids = self.object.products.all().values_list('related_products__id', flat=True)
         context['related_products'] = Product.objects.filter(id__in=ids)
         return context
-
-
-@login_required
-def add_report(request, pk):
-    """
-        a View for creating new report using a form
-    """
-    organization = get_object_or_404(Organization,
-                                     id=pk)
-    if request.method == 'POST':
-        form = ReportForm(data=request.POST,
-                          files=request.FILES)
-        if form.is_valid():
-            organization.followups.create(
-                registrar=request.user,
-                organization=organization,
-                report=form.cleaned_data['report']
-            )
-            return redirect('organization:organization_detail', organization.id)
-        else:
-            return redirect('organization:organization_list')
-    else:
-        form = ReportForm()
-        return render(request,
-                      'organization/report_from.html',
-                      {'form': form,
-                       'organization': organization})
 
 
 class CreateProvinceView(CreateView):

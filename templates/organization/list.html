@@ -21,7 +21,7 @@
                 <td>{{ organization.name }}</td>
                 <td>{{ organization.registrar }}</td>
                 <td>{{ organization.contact_name }}</td>
-                <td><a href="{% url 'organization:add_report' organization.id %}">Adding Report</a></td>
+                <td><a href="{% url 'followup:add_report' organization.id %}">Adding Report</a></td>
             </tr>
         {% endfor %}
         </tbody>

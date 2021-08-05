@@ -26,6 +26,8 @@ urlpatterns = [
     path('inventory/', include('inventory.urls', namespace='inventory')),
     path('accounts/login/', LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('accounts/logout/', LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
+    path('followup/', include('followup.urls', namespace='followup')),
+    path('quote/', include('quote.urls', namespace='quote'))
 ]
 
 if settings.DEBUG:
