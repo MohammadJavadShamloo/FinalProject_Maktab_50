@@ -7,7 +7,7 @@
     <br>
     <button type="button" class="btn btn-info"><a href="{% url 'organization:organization_update' organization.id %}">Update
         The Organization</a></button>
-    <button type="button" class="btn btn-info"><a href="">Making Quote</a></button>
+    <button type="button" class="btn btn-info"><a href="{% url 'quote:quote_create' %}">Making Quote</a></button>
     <button type="button" class="btn btn-info"><a href="{% url 'followup:add_report' organization.id %}">Adding
         Report</a></button>
     <table class="h-75 table table-hover mt-5">

@@ -7,6 +7,9 @@ from organization.models import Organization
 
 
 class QuoteItem(models.Model):
+    """
+    Model For Quote Items That Has Parent Named Quote
+    """
     quote = models.ForeignKey('Quote',
                               on_delete=models.PROTECT,
                               related_name='items')
@@ -28,6 +31,9 @@ class QuoteItem(models.Model):
 
 
 class Quote(models.Model):
+    """
+    Model Quote For Saving Quote For Every Organization.
+    """
     organization = models.ForeignKey(Organization,
                                      on_delete=models.PROTECT,
                                      related_name='quotes')

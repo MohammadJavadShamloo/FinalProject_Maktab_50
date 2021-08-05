@@ -13,6 +13,9 @@ from .tasks import send_quote
 
 
 class QuoteCreateView(CreateView):
+    """
+    Class Based View For Creating Quotes By Formsets
+    """
     form_class = QuoteForm
     template_name = 'quote/create.html'
 
@@ -48,17 +51,29 @@ class QuoteCreateView(CreateView):
 
 
 class QuoteListView(ListView):
+    """
+    Class Based View For Listing Available Quotes
+    """
     model = Quote
     template_name = 'quote/list.html'
 
 
 class QuoteDetailView(DetailView):
+    """
+    Class Based View FOr Showing Details Of A Quote
+    """
     model = Quote
     template_name = 'quote/detail.html'
 
 
 @login_required
 def quote_pdf(request, quote_id):
+    """
+    View For Making Pdf For Quotes
+    :param request: request
+    :param quote_id: id of quote
+    :return:
+    """
     quote = get_object_or_404(Quote, id=quote_id)
 
     html = render_to_string('quote/pdf_template.html',
@@ -74,6 +89,13 @@ def quote_pdf(request, quote_id):
 
 
 def send_quote_to_organization(request, quote_id, organization_id):
+    """
+    View To Send Quotes By Contact Email Of Organization
+    :param request: request
+    :param quote_id: quote id
+    :param organization_id: organization id
+    :return: mail status
+    """
     is_sent = send_quote.delay(quote_id, organization_id)
     if is_sent:
         return HttpResponse('Ok')

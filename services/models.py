@@ -3,6 +3,9 @@ from django.db import models
 
 
 class EmailHistory(models.Model):
+    """
+    Model To Save Email History
+    """
     name = models.CharField(max_length=200)
     report = models.TextField()
     is_sent = models.BooleanField(default=False)

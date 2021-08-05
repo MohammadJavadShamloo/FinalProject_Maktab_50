@@ -34,6 +34,10 @@
                    href="{% url 'inventory:product_list' %}">Product List</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3"
                    href="{% url 'inventory:product_create' %}">Create Product</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'quote:quote_list' %}">Quote List</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                   href="{% url 'quote:quote_create' %}">Quote Create</a>
             </div>
         </div>
     {% endif %}
@@ -79,6 +83,15 @@
                                     <a class="dropdown-item" href="{% url 'inventory:product_create' %}">Create
                                         Product</a>
                                     <a class="dropdown-item" href="{% url 'inventory:product_list' %}">List Product</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quote</a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'quote:quote_create' %}">Create
+                                        Quote</a>
+                                    <a class="dropdown-item" href="{% url 'quote:quote_list' %}">List Quote</a>
                                 </div>
                             </li>
                         {% else %}

@@ -10,6 +10,12 @@ from services.models import EmailHistory
 
 @app.task
 def send_quote(quote_id, organization_id):
+    """
+    Task To Send Email By Provided Html
+    :param quote_id: Id Of Quote
+    :param organization_id: Id Of Organization
+    :return: mail status
+    """
     organization = Organization.objects.get(id=organization_id)
     quote = Quote.objects.get(id=quote_id)
     subject = f'Quote no. {quote_id}'
