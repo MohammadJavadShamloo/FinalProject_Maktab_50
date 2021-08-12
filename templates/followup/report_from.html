@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %} Report of {{ organization.name }} {% endblock %}
+
+{% block content %}
+    <form method="post" id="report-form">
+        {% csrf_token %}
+        {{ form |crispy }}
+        <button type="submit" value="Save Report" class="btn btn-success" id="report-submit">Save Report</button>
+    </form>
+    <br>
+    <br>
+    <table class="table table-hover" id="reports">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Registrar</th>
+            <th scope="col">Date</th>
+            <th scope="col">Report</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for followup in organization.followups.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ followup.registrar }}</td>
+                <td>{{ followup.date }}</td>
+                <td>{{ followup.report|truncatewords:5 }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+    <script>
+        var csrftoken = Cookies.get('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        function truncate(str, no_words) {
+            return str.split(" ").splice(0, no_words).join(" ");
+        }
+
+        $(document).ready(function () {
+            $('#report-submit').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{% url "followup:add_report" organization.id %}',
+                    method: 'POST',
+                    data: {
+                        report: $('#id_report').val()
+                    },
+                    success: function (json) {
+                        window.alert('followup has been saved.');
+                        var appending_detail = '<tr><th scope="row">' + json['number'] + '</th><td>' + json['registrar'] +
+                            '</td><td>' + json['date'] + '</td><td>' + truncate(json['report'],5) + '</td></tr>';
+
+                        $("#reports tbody").append(appending_detail);
+                    },
+                    error: function (json) {
+                        window.alert('followup hasn\'t been saved.');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

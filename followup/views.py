@@ -14,17 +14,19 @@ def add_report(request, pk):
     organization = get_object_or_404(Organization,
                                      id=pk)
     if request.method == 'POST' and request.is_ajax():
-        form = ReportForm()
-        form.instance.registrar = request.user
-        form.instance.organization = organization
-        form.instance.report = request.POST.get('report')
-        form.save()
+        followup = organization.followups.create(registrar=request.user,
+                                                 organization=organization,
+                                                 report=request.POST.get('report'))
         return JsonResponse({
-            'Status': 'Ok'
+            'Status': 'Ok',
+            'registrar': str(followup.registrar),
+            'number': str(organization.followups.count()),
+            'report': str(followup.report),
+            'date': followup.date.strftime("%b. %d, %Y, %H:%M %P"),
         })
     else:
         form = ReportForm()
         return render(request,
-                      'organization/report_from.html',
+                      'followup/report_from.html',
                       {'form': form,
                        'organization': organization})
