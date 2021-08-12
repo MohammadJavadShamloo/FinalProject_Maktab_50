@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'quote.apps.QuoteConfig',
     'celery',
     'services.apps.ServicesConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,9 @@ EMAIL_HOST_USER = 'mshomloo@gmail.com'
 EMAIL_HOST_PASSWORD = 'MOHAMMADSHAMLOO1381'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'organization'
@@ -22,7 +22,8 @@ urlpatterns = [
     path('province/create/',
          views.CreateProvinceView.as_view(),
          name='province_create'),
-    path('province/update/<int:pk>',
+    path('province/update/<int:pk>/',
          views.UpdateProvinceView.as_view(),
          name='province_update'),
+    path('api/', include('organization.api.urls', namespace='api')),
 ]
