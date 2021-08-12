@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'celery',
     'services.apps.ServicesConfig',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]

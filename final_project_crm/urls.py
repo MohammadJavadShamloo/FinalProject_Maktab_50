@@ -18,8 +18,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('', LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('admin/', admin.site.urls),
     path('organization/', include('organization.urls', namespace='organization')),
@@ -27,7 +30,7 @@ urlpatterns = [
     path('accounts/login/', LoginView.as_view(template_name='auth/login.html'), name='login'),
     path('accounts/logout/', LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
     path('followup/', include('followup.urls', namespace='followup')),
-    path('quote/', include('quote.urls', namespace='quote'))
+    path('quote/', include('quote.urls', namespace='quote')),
 ]
 
 if settings.DEBUG:
