@@ -5,8 +5,7 @@
 {% block content %}
     <br>
     <br>
-    <button type="button" class="btn btn-info"><a href="{% url 'inventory:product_update' product.id %}">Update
-        The Product</a></button>
+    <a class="btn btn-info" href="{% url 'inventory:product_update' product.id %}">Update The Product</a>
     <table class="h-75 table table-hover mt-5">
         <tbody>
         <tr>
@@ -23,11 +22,11 @@
         </tr>
         <tr>
             <td>Pdf File</td>
-            <td><a href="{{ product.pdf_file.url }}">Download Pdf</a></td>
+            <td><a class="btn btn-info" href="{{ product.pdf_file.url }}">Download Pdf</a></td>
         </tr>
         <tr>
             <td>Pic File</td>
-            <td><a href="{{ product.pic_file.url }}">Download Pic</a></td>
+            <td><a class="btn btn-info" href="{{ product.pic_file.url }}">Download Pic</a></td>
         </tr>
         <tr>
             <td>Report</td>
@@ -35,8 +34,9 @@
         </tr>
         </tbody>
     </table>
-
-    Related Products
+    <br>
+    <h4>Related Products : </h4>
+    <br>
     <table class="table table-bordered">
         <thead>
         <tr>

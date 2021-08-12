@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Products Lists{% endblock %}
 
 {% block content %}
@@ -17,11 +18,17 @@
         {% for product in product_list %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'inventory:product_detail' product.id %}">Show Product</a></td>
+                <td><a class="btn btn-info" href="{% url 'inventory:product_detail' product.id %}">Show Product</a></td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>
-                <td>{{ product.tax }}</td>
-                <td><a href="{{ product.pdf_file.url }}">Download Pdf</a></td>
+                <td>
+                    {% if product.tax %}
+                        <img src="{% static 'assets/True.jpg'%}" alt="True Picture">
+                    {% else %}
+                        <img src="{% static 'assets/False.jpg'%}" alt="False Picture">
+                    {% endif %}
+                </td>
+                <td><a class="btn btn-info" href="{{ product.pdf_file.url }}">Download Pdf</a></td>
             </tr>
         {% endfor %}
         </tbody>

@@ -60,7 +60,7 @@ class QuoteListView(ListView):
 
 class QuoteDetailView(DetailView):
     """
-    Class Based View FOr Showing Details Of A Quote
+    Class Based View For Showing Details Of A Quote
     """
     model = Quote
     template_name = 'quote/detail.html'

@@ -44,7 +44,7 @@ class Quote(models.Model):
     updating_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['registration_date', ]
+        ordering = ['-registration_date', ]
 
     def __str__(self):
         return f'Quote Number {self.id}'

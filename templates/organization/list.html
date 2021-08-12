@@ -6,7 +6,7 @@
         <thead>
         <tr>
             <th scope="col">No.</th>
-            <th scope="col">Organizations</th>
+            <th scope="col">Organization Detail</th>
             <th scope="col">Organization Name</th>
             <th scope="col">Registrar</th>
             <th scope="col">Contact</th>
@@ -17,11 +17,11 @@
         {% for organization in organization_list %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'organization:organization_detail' organization.id %}">Show Organization</a></td>
+                <td><a class="btn btn-info" href="{% url 'organization:organization_detail' organization.id %}">Show Organization</a></td>
                 <td>{{ organization.name }}</td>
                 <td>{{ organization.registrar }}</td>
                 <td>{{ organization.contact_name }}</td>
-                <td><a href="{% url 'followup:add_report' organization.id %}">Adding Report</a></td>
+                <td><a class="btn btn-info" href="{% url 'followup:add_report' organization.id %}">Adding Report</a></td>
             </tr>
         {% endfor %}
         </tbody>
