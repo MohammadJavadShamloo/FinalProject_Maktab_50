@@ -10891,3 +10891,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
   }
 }
+
+@media print {
+  /* style sheet for print goes here */
+  .noprint {
+    visibility: hidden;
+  }
+}

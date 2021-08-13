@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block content %}
+    <br>
+    <br>
+    <button class="btn btn-info noprint" onclick="window.print()">Print Pdf</button>
+    <br>
+    <br>
     <table class="table m-auto">
         <thead>
         <tr>
@@ -34,23 +39,33 @@
     <br>
     <h4>Items : </h4>
     <table class="table table-striped">
-        <thead>
+        <tbody>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Product</th>
+            <th scope="col">Discount</th>
             <th scope="col">Count</th>
             <th scope="col">Price</th>
-            <th scope="col">Discount</th>
         </tr>
         {% for item in quote.items.all %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ item.product.name }}</td>
+                <td>{{ item.off_percent }}</td>
                 <td>{{ item.count_of_product }}</td>
                 <td>{{ item.price_after_tax }}</td>
-                <td>{{ item.off_percent }}</td>
             </tr>
         {% endfor %}
-        </thead>
+        <tr>
+            <th scope="row">Total Count</th>
+            <td colspan="2"></td>
+            <td>{{ quote.total_count }}</td>
+            <td>{{ quote.total_price }}</td>
+        </tr>
+        </tbody>
     </table>
+
+    <style>
+
+    </style>
 {% endblock %}

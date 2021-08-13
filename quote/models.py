@@ -42,6 +42,11 @@ class Quote(models.Model):
                                   related_name='quotes')
     registration_date = models.DateTimeField(auto_now_add=True)
     updating_date = models.DateTimeField(auto_now=True)
+    total_price = models.DecimalField(max_digits=11,
+                                      decimal_places=2,
+                                      blank=True,
+                                      null=True)
+    total_count = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['-registration_date', ]

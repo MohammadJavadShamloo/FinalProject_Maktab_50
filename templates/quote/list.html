@@ -26,7 +26,8 @@
                 <td>{{ quote.organization.contact_name }}</td>
                 <td>{{ quote.items.all|join:',' }}</td>
                 <td><a class="btn btn-info" href="{% url 'quote:quote_pdf' quote.id %}">Download Pdf</a></td>
-                <td><a class="btn btn-info" href="{% url 'quote:send_mail' quote.id quote.organization.id%}">Send Email</a></td>
+                <td><a class="btn btn-info" href="{% url 'quote:send_mail' quote.id quote.organization.id %}">Send
+                    Email</a></td>
             </tr>
         {% endfor %}
         </tbody>

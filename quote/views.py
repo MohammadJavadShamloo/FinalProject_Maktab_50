@@ -1,7 +1,8 @@
 import weasyprint
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.db.models import Sum
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
@@ -43,7 +44,10 @@ class QuoteCreateView(CreateView):
             item.price_before_tax = calculate_off(item.product.price * item.count_of_product, item.off_percent)
             item.price_after_tax = calculate_tax(item.price_before_tax, 9 if item.product.tax else 0)
             item.save()
-        return redirect('organization:organization_list')
+        self.object.total_price = self.object.items.aggregate(total_price=Sum('price_after_tax'))['total_price']
+        self.object.total_count = self.object.items.aggregate(total_count=Sum('count_of_product'))['total_count']
+        self.object.save()
+        return redirect('quote:quote_list')
 
     def form_invalid(self, form, quote_item_formset):
         return self.render_to_response(self.get_context_data(form=form,
@@ -97,7 +101,4 @@ def send_quote_to_organization(request, quote_id, organization_id):
     :return: mail status
     """
     is_sent = send_quote.delay(quote_id, organization_id)
-    if is_sent:
-        return HttpResponse('Ok')
-    else:
-        return HttpResponse('No')
+    return is_sent
