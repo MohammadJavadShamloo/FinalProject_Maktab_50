@@ -73,7 +73,7 @@ class CreateProvinceView(CreateView):
     model = Province
     template_name = 'organization/create_province.html'
     fields = ['name']
-    success_url = reverse_lazy('organization:organization_list')
+    success_url = reverse_lazy('organization:province_list')
 
 
 class UpdateProvinceView(UpdateView):

@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
 from quote.forms import QuoteItemFormSet, QuoteForm
@@ -19,6 +20,7 @@ class QuoteCreateView(CreateView):
     """
     form_class = QuoteForm
     template_name = 'quote/create.html'
+    success_url = reverse_lazy('quote:quote_list')
 
     def get_context_data(self, **kwargs):
         context = super(QuoteCreateView, self).get_context_data(**kwargs)
@@ -100,5 +102,5 @@ def send_quote_to_organization(request, quote_id, organization_id):
     :param organization_id: organization id
     :return: mail status
     """
-    is_sent = send_quote.delay(quote_id, organization_id)
-    return is_sent
+    send_quote.delay(quote_id, organization_id)
+    return redirect('quote:quote_list')

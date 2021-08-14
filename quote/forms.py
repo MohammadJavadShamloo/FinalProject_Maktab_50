@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import inlineformset_factory
 
+from inventory.models import Product
 from quote.models import QuoteItem, Quote
 
 
@@ -19,5 +20,5 @@ class QuoteItemForm(forms.ModelForm):
 QuoteItemFormSet = inlineformset_factory(Quote,
                                          QuoteItem,
                                          form=QuoteItemForm,
-                                         extra=5,
-                                         max_num=10)
+                                         extra=Product.objects.count(),
+                                         max_num=100)
